@@ -20,6 +20,22 @@ public class GastosController : ControllerBase
     {
         return Ok(await _service.ReadAllAsync());
     }
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Gasto>> GetById(int id)
+    {
+        var gasto = await _service.ReadByIdAsync(id);
+        
+        if (gasto is null)
+        {
+            return NotFound($"O gasto com o id {id} não foi encontrado");
+        }
+
+        return Ok(gasto);
+    }
+    
+    
+    
     
     
     
