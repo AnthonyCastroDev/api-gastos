@@ -40,6 +40,19 @@ public class GastosController : ControllerBase
         await _service.CreateAsync(gasto);
         return Ok(gasto);
     }
+
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> Delete(int id)
+    {
+        var deletou = await _service.DeleteAsync(id);
+
+        if (!deletou)
+        { 
+            return NotFound($"O id {id} não foi encontrado");
+        }
+        
+         return NoContent();
+    }
     
     
     

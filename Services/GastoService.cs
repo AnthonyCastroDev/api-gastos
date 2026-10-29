@@ -30,7 +30,16 @@ public class GastoService : IGastoService
 
    public async Task<bool> DeleteAsync(int id)
    {
-      throw new NotImplementedException();
+      var gastoExistente = await _dbContext.Gastos.FirstOrDefaultAsync(g => g.Id == id);
+      
+      if(gastoExistente is null)
+      {
+         return false;
+      }
+      
+      _dbContext.Gastos.Remove(gastoExistente);
+      await _dbContext.SaveChangesAsync();
+      return true;
    }
 
    public async Task<Gasto> CreateAsync(Gasto gasto)
