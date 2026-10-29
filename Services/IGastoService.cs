@@ -8,5 +8,5 @@ public interface IGastoService
     public Task<Gasto?> ReadByIdAsync(int id);
     public Task<Gasto> UpdateAsync(Gasto gasto, int id);
     public Task<bool> DeleteAsync(int id);
-    public Task<String> CreateAsync();
+    public Task CreateAsync();
 }

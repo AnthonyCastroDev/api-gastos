@@ -15,7 +15,7 @@ public class GastoService : IGastoService
    
    public async Task<List<Gasto>> ReadAllAsync()
    {
-      throw new NotImplementedException();
+      return await _dbContext.Gastos.ToListAsync();
    }
 
    public async Task<Gasto?> ReadByIdAsync(int id)
@@ -33,7 +33,7 @@ public class GastoService : IGastoService
       throw new NotImplementedException();
    }
 
-   public async Task<string> CreateAsync()
+   public async Task CreateAsync()
    {
       throw new NotImplementedException();
    }
