@@ -35,7 +35,7 @@ public class GastosController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult> Post([FromBody] Gasto gasto)
+    public async Task<ActionResult<Gasto>> Post([FromBody] Gasto gasto)
     {
       var created = await _service.CreateAsync(gasto);
       return CreatedAtAction(nameof(GetById), new {created.Id}, created);
@@ -53,5 +53,18 @@ public class GastosController : ControllerBase
         
          return NoContent();
         
+    }
+
+    [HttpPut("{id}")]
+    public async Task<ActionResult<Gasto>> Put(int id, Gasto gasto)
+    {
+        var gastoExistente = await _service.UpdateAsync(gasto, id);
+
+        if (gastoExistente is null)
+        {
+            return NotFound($"O id {id} não foi encontrado");
+        }
+
+        return Ok(gastoExistente);
     }
 }

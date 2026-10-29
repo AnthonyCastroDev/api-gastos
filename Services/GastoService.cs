@@ -25,7 +25,20 @@ public class GastoService : IGastoService
 
    public async Task<Gasto?> UpdateAsync(Gasto gasto, int id)
    {
-      throw new NotImplementedException();
+      var gastoExistente = await _dbContext.Gastos.FirstOrDefaultAsync(g=> g.Id == id);
+      
+      if(gastoExistente is null)
+      {
+         return null;
+      }
+      
+      gastoExistente.Data = gasto.Data;
+      gastoExistente.Categoria = gasto.Categoria;
+      gastoExistente.Descricao = gasto.Descricao;
+      gastoExistente.Valor = gasto.Valor;
+      
+      await _dbContext.SaveChangesAsync();
+      return gastoExistente;
    }
 
    public async Task<bool> DeleteAsync(int id)
