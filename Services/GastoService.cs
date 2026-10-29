@@ -35,7 +35,9 @@ public class GastoService : IGastoService
 
    public async Task<Gasto> CreateAsync(Gasto gasto)
    {
-      throw new NotImplementedException();
+      _dbContext.Gastos.Add(gasto);
+      await _dbContext.SaveChangesAsync();
+      return gasto;
    }
    
 }

@@ -33,6 +33,13 @@ public class GastosController : ControllerBase
 
         return Ok(gasto);
     }
+
+    [HttpPost]
+    public async Task<ActionResult> Post([FromBody] Gasto gasto)
+    {
+        await _service.CreateAsync(gasto);
+        return Ok(gasto);
+    }
     
     
     
