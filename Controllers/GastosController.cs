@@ -37,8 +37,8 @@ public class GastosController : ControllerBase
     [HttpPost]
     public async Task<ActionResult> Post([FromBody] Gasto gasto)
     {
-        await _service.CreateAsync(gasto);
-        return Ok(gasto);
+      var created = await _service.CreateAsync(gasto);
+      return CreatedAtAction(nameof(GetById), new {created.Id}, created);
     }
 
     [HttpDelete("{id}")]
@@ -52,16 +52,6 @@ public class GastosController : ControllerBase
         }
         
          return NoContent();
+        
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }
